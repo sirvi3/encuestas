@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .error-container {
+            width: 400px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4444;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1 class="error-title">Error</h1>
+    <p class="error-message" th:text="${mensaje}"></p>
+</div>
+</body>
+</html>

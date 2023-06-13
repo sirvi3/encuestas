@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Encuesta de Satisfacción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333333;
+        }
+
+        p {
+            color: #666666;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Encuesta de Satisfacción</h1>
+    <p>Estimado cliente,</p>
+    <p>Agradecemos su reciente interacción con nuestra empresa. Nos gustaría conocer su opinión para seguir mejorando nuestros servicios.</p>
+    <p>Por favor, tómese unos minutos para completar nuestra encuesta de satisfacción haciendo clic en el siguiente enlace:</p>
+    <p><a class="button" th:href="@{${encuestaLink}}">Contestar Encuesta</a></p>
+    <p>Su opinión es muy importante para nosotros. ¡Gracias de antemano por su colaboración!</p>
+    <p>Saludos,</p>
+    <p>Equipo de Atención al Cliente</p>
+</div>
+</body>
+</html>

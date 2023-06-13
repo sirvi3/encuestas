@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Encuesta de satisfacción</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .elemPeticion {
+        font-weight: bold;
+        color: navy;
+    }
+  </style>
+</head>
+<body>
+<h1>Encuesta de satisfacción a los usuarios del servicio de peticiones de servicio</h1>
+
+<form th:action="@{'/encuesta/' + ${peticion.codigoEncuesta}}" id="survey" name="survey" method="POST">
+    <h2>Cuestionario de satisfacción</h2>
+
+    <p>Buenos días/buenas tardes, nos ponemos en contacto con usted de la empresa "GESTIONES XXX", en relación a
+        una petición que usted realizó el <span class="elemPeticion"  th:text="${peticion.fechaPeticionLegible}"></span> por la solicitud de servicio que hizo usted en
+        referencia a la ubicación <span class="elemPeticion" th:text="${peticion.ubicacion}"></span> con motivo de <span class="elemPeticion" th:text="${peticion.motivo}"></span>.</p>
+
+    <p>La empresa agradecería que respondiera a unas breves preguntas sobre el servicio que le han prestado. Su opinión es muy importante para mejorar el servicio.</p>
+
+    <p>Toda la información que nos facilite está sujeta a la Ley Orgánica de 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales y será tratada con fines estadísticos de manera global.</p>
+
+    <div id="pregunta1">
+        <h3>Pregunta 1:</h3>
+        <p>Por favor, valore de 0 a 10 su satisfacción con el tiempo que ha tardado el trabajador en llegar al lugar de la incidencia, siendo 0 que está muy insatisfecho/a y 10 que está muy satisfecho/a.</p>
+        <div>
+            <div th:each="valor, iter : ${#numbers.sequence(1, 10)}" style="float:left">
+                <input type="radio" th:id="'p1-' + ${iter.index}" th:name="'respuesta1'" th:value="${valor}">
+                <label class="radio-label" th:for="'p1-' + ${iter.index}" th:text="${valor}"></label>
+            </div>
+        </div>
+        <br style="clear: both; float:none;"><br>
+    </div>
+
+    <div id="pregunta2" class="hidden">
+        <h3>Pregunta 2:</h3>
+        <p>A continuación, le voy a preguntar sobre la incidencia por la que usted avisó.</p>
+        <p>Dígame si:</p>
+        <div>
+            <input type="radio" id="p2-1" name="respuesta2" value="ANTES">
+            <label class="radio-label" for="p2-1">Se resolvió antes de que el trabajador llegara</label>
+        </div>
+        <div>
+            <input type="radio" id="p2-2" name="respuesta2" value="AGENTE">
+            <label class="radio-label" for="p2-2">La resolvió el agente</label>
+        </div>
+        <div>
+            <input type="radio" id="p2-3" name="respuesta2" value="SIN RESOLVER">
+            <label class="radio-label" for="p2-3">No se resolvió</label>
+        </div>
+        <div>
+            <input type="radio" id="p2-4" name="respuesta2" value="NS/NC">
+            <label class="radio-label" for="p2-4">No sabe/No contesta</label>
+        </div>
+        <br style="clear: both; float:none;"><br>
+    </div>
+
+    <div id="pregunta3" class="hidden">
+        <h3>Pregunta 3:</h3>
+        <p>¿Tuvo usted algún trato (personal, telefónico...) con el trabajador?</p>
+        <div style="float: left">
+            <input type="radio" id="p3-1" name="respuesta3" value="SI" required>
+            <label class="radio-label" for="p3-1">Sí</label>
+        </div>
+        <div style="float: left">
+            <input type="radio" id="p3-2" name="respuesta3" value="NO">
+            <label class="radio-label" for="p3-2">No</label>
+        </div>
+        <br style="clear: both; float:none;"><br>
+    </div>
+
+    <div id="pregunta4" class="hidden">
+        <h3>Pregunta 4:</h3>
+        <p>Valore, también de 0 a 10, el trato del trabajador que le ha atendido en el lugar de la incidencia, siendo 0 que está muy insatisfecho/a y 10 que está muy satisfecho/a.</p>
+        <div>
+            <div th:each="valor, iter : ${#numbers.sequence(1, 10)}" style="float:left">
+                <input type="radio" th:id="'p4-' + ${iter.index}" th:name="'respuesta4'" th:value="${valor}">
+                <label class="radio-label" th:for="'p4-' + ${iter.index}" th:text="${valor}"></label>
+            </div>
+        </div>
+        <br style="clear: both; float:none;"><br>
+    </div>
+
+    <div id="pregunta5" class="hidden">
+        <h3>Pregunta 5:</h3>
+        <p>Finalmente, valore su satisfacción en conjunto con el servicio prestado, siendo 0 que está muy insatisfecho/a y 10 que está muy satisfecho/a.</p>
+        <div>
+            <div th:each="valor, iter : ${#numbers.sequence(1, 10)}" style="float:left">
+                <input type="radio" th:id="'p5-' + ${iter.index}" th:name="'respuesta5'" th:value="${valor}">
+                <label class="radio-label" th:for="'p5-' + ${iter.index}" th:text="${valor}"></label>
+            </div>
+        </div>
+        <br style="clear: both; float:none;"><br>
+    </div>
+
+    <p id="mensaje-final" class="hidden">¡Muchas gracias por su colaboración, ya hemos terminado!</p>
+
+    <input id="boton-siguiente" type="button" value="Siguiente">
+    <div class="hidden">
+        <input id="boton-enviar" type="submit" value="Enviar" >
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function() {
+      $("#boton-enviar").addClass("hidden");
+      var preguntas = ["pregunta1", "pregunta2", "pregunta3", "pregunta4", "pregunta5"];
+      var indicePregunta = 0;
+      $("#boton-siguiente").click(function(e) {
+        // O elige respuesta o no puede pasar a la siguiente
+        if (!$('input[name="respuesta'+(indicePregunta+1)+'"]').is(':checked'))
+          return;
+
+        if (indicePregunta < preguntas.length - 1) {
+          $("#" + preguntas[indicePregunta++]).addClass("hidden");
+          $("#" + preguntas[indicePregunta]).removeClass("hidden");
+          console.log('Click '+indicePregunta);
+          if (indicePregunta === preguntas.length - 1) {
+            $("#boton-siguiente").addClass("hidden");
+            $("#boton-enviar").parent().removeClass("hidden");
+          }
+        }
+      });
+
+      $("#boton-enviar").click(function(e) {
+        if (!$('input[name="respuesta5"]').is(':checked')) {
+          e.preventDefault();
+          return;
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>

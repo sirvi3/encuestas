@@ -1,0 +1,21 @@
+spring:
+    datasource:
+        url: jdbc:sqlite:${user.home}/encuestas.db
+        driver-class-name: org.sqlite.JDBC
+        initialize: true
+        initialization-mode: always
+        continue-on-error: false
+    sql:
+        init:
+            mode: always
+    mail:
+        host: 127.0.0.1
+        port: 1025
+        username: test
+        password: test
+
+logging:
+    level:
+        .: error
+        org.springframework: ERROR
+        tfg.gil.silvia: WARN
